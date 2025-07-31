@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Unit extends Model
 {
+    protected $guarded = ['id'];
     use HasFactory;
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

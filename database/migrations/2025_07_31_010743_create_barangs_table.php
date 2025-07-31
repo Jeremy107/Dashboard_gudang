@@ -12,8 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('barangs', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedBigInteger('kode_barang')->primary();
+            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('unit_id');
+            $table->string('name');
+            $table->text('description')->nullable();
+            $table->double('price', 15, 2);
+            $table->integer('stock');
+            $table->float('weight');
+            $table->string('url_picture');
             $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
         });
     }
 
